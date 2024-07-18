@@ -68,12 +68,13 @@ app.delete('/products/:id', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log(`Node API app is running on port 3000`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`Node API app is running on port ${port}`);
 });
 
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb+srv://sayedul:1234567890@grocery.q754jkm.mongodb.net/Node-API?retryWrites=true&w=majority')
+mongoose.connect(process.env.MONGO_URI)
     .then(() => {
         console.log('connected to MongoDB');
     }).catch((error) => {
